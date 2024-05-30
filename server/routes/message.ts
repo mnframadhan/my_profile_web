@@ -6,7 +6,7 @@ type Message = {
 	message: string
 }
 
-const fake_message: Message = [
+const fake_message: Message[] = [
 		{id: 1, message:"Yo man, great profile!"},
 		{id: 2, message: "Hey dude, lets collab with me"},
 		{id: 3, message: "What a great website, you rock it!"}
