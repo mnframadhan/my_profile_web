@@ -11,10 +11,22 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ServiceImport } from './routes/service'
+import { Route as JourneyImport } from './routes/journey'
 import { Route as IndexImport } from './routes/index'
 import { Route as AboutImport } from './routes/about.'
 
 // Create/Update Routes
+
+const ServiceRoute = ServiceImport.update({
+  path: '/service',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const JourneyRoute = JourneyImport.update({
+  path: '/journey',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -37,6 +49,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/journey': {
+      id: '/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof JourneyImport
+      parentRoute: typeof rootRoute
+    }
+    '/service': {
+      id: '/service'
+      path: '/service'
+      fullPath: '/service'
+      preLoaderRoute: typeof ServiceImport
+      parentRoute: typeof rootRoute
+    }
     '/about/': {
       id: '/about/'
       path: '/about'
@@ -49,7 +75,12 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, AboutRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  JourneyRoute,
+  ServiceRoute,
+  AboutRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -60,11 +91,19 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, AboutRoute })
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/journey",
+        "/service",
         "/about/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/journey": {
+      "filePath": "journey.tsx"
+    },
+    "/service": {
+      "filePath": "service.tsx"
     },
     "/about/": {
       "filePath": "about..tsx"
