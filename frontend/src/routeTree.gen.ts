@@ -12,7 +12,8 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as ServiceImport } from './routes/service'
-import { Route as JourneyImport } from './routes/journey'
+import { Route as RequestCompFormImport } from './routes/requestCompForm'
+import { Route as ExamplesImport } from './routes/examples'
 import { Route as IndexImport } from './routes/index'
 import { Route as AboutImport } from './routes/about.'
 
@@ -23,8 +24,13 @@ const ServiceRoute = ServiceImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const JourneyRoute = JourneyImport.update({
-  path: '/journey',
+const RequestCompFormRoute = RequestCompFormImport.update({
+  path: '/requestCompForm',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExamplesRoute = ExamplesImport.update({
+  path: '/examples',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -49,11 +55,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/journey': {
-      id: '/journey'
-      path: '/journey'
-      fullPath: '/journey'
-      preLoaderRoute: typeof JourneyImport
+    '/examples': {
+      id: '/examples'
+      path: '/examples'
+      fullPath: '/examples'
+      preLoaderRoute: typeof ExamplesImport
+      parentRoute: typeof rootRoute
+    }
+    '/requestCompForm': {
+      id: '/requestCompForm'
+      path: '/requestCompForm'
+      fullPath: '/requestCompForm'
+      preLoaderRoute: typeof RequestCompFormImport
       parentRoute: typeof rootRoute
     }
     '/service': {
@@ -77,7 +90,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  JourneyRoute,
+  ExamplesRoute,
+  RequestCompFormRoute,
   ServiceRoute,
   AboutRoute,
 })
@@ -91,7 +105,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/journey",
+        "/examples",
+        "/requestCompForm",
         "/service",
         "/about/"
       ]
@@ -99,8 +114,11 @@ export const routeTree = rootRoute.addChildren({
     "/": {
       "filePath": "index.tsx"
     },
-    "/journey": {
-      "filePath": "journey.tsx"
+    "/examples": {
+      "filePath": "examples.tsx"
+    },
+    "/requestCompForm": {
+      "filePath": "requestCompForm.tsx"
     },
     "/service": {
       "filePath": "service.tsx"
