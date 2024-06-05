@@ -9,7 +9,8 @@ import { Button } from "@/components/ui/button";
 // zod validator
 import { zodValidator } from "@tanstack/zod-form-adapter";
 // api
-import { messageAPI } from "@/lib/api";
+import { messageAPI, getAllMessageQueryOptions } from "@/lib/api";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { Header } from "./header";
 
@@ -17,6 +18,7 @@ import { sendMessageSchema } from "@server/sharedTyped";
 import { Textarea } from "@/components/ui/textarea";
 
 export function SendMessage() {
+  const queryClient = useQueryClient()
   const form = useForm({
     validatorAdapter: zodValidator,
     defaultValues: {
@@ -24,14 +26,26 @@ export function SendMessage() {
       message: "",
     },
     onSubmit: async ({ value }) => {
+
+      const existingMessages = await queryClient.ensureQueryData(getAllMessageQueryOptions);
+
       const res = await messageAPI.message.$post({ json: value });
 
       if (!res.ok) {
         throw new Error("Server Error");
       }
+
+      const newMessage = await res.json();
+
+      const test  = {
+        ...existingMessages,
+        messages: [newMessage, ...existingMessages.messages]
+      }
+      
+      queryClient.setQueryData(getAllMessageQueryOptions.queryKey, test);
     },
   });
-
+ 
   return (
     <>
     <div className="border border-2 px-2 w-full">

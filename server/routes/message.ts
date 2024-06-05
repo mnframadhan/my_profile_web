@@ -14,11 +14,11 @@ import { insertMessageSchema } from "../db/schema/message"
 
 const app = new Hono()
     .get('/', async (c) => {
-        const result = await db
+        const messages = await db
                             .select()
                             .from(message)
                             .orderBy(desc(message.id))
-        return c.json({data: result})
+        return c.json({messages: messages})
     })
 
     .post('/', zValidator('json', sendMessageSchema), async (c) => {
@@ -33,8 +33,11 @@ const app = new Hono()
         const result = await db
                             .insert(messageTable)
                             .values(validatedMessage)
+                            .returning()
+                            .then((res) => res[0])
 
-        return c.json({status: 201, message: "sent", data: result})
+        c.status(201)
+        return c.json(result)
     })
 
 export default app
