@@ -1,12 +1,18 @@
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
-import { ModeToggle } from '@/components/mode-toggle'
+import { Button } from '@/components/ui/button'
 
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="py-2 flex justify-between w-full shadow items-center">
+      <div className="py-2 flex justify-between w-full shadow items-center bg-indigo-50">
+        <div className='px-24'>
+          <Link to='/'>
+            <h3 className='text-xl font-semibold'>MilenialSolusindo</h3>
+          </Link>
+          
+        </div>
 
-        <div className='flex gap-4 px-24'>
+        <div className='flex gap-4 '>
           <Link to="/" className="[&.active]:font-bold">
             Home
           </Link>
@@ -15,10 +21,9 @@ export const Route = createRootRoute({
           </Link>
         </div>
         <div className='px-24'>
-          <ModeToggle></ModeToggle>
+          <Button>Login</Button>
         </div>
       </div>
-      <hr />
       <Outlet />
     </>
   ),

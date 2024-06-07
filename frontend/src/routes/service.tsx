@@ -12,8 +12,10 @@ function Service() {
   return (
 
     <>
-      <Header title="Service Available"></Header>
-      <div className="container flex gap-10 flex-wrap justify-between">
+      <center>
+        <Header title="Service Available"></Header>
+      </center>
+      <div className="container flex gap-10 flex-wrap justify-between sm:justify-center">
       <ServiceCard
         title="Jasa Pembuatan Website Company Profile"
         description="Buat website perusahaanmu lebih menarik, responsif, dan super cepat. Dapatkan harga terjangkau."

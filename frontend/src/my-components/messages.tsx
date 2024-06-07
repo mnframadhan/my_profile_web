@@ -35,7 +35,7 @@ export function Messages() {
                   <p className="text-xs text-italic">{m.created_at}</p>
                 </div>
                 <div className="p-2 rounded-md">
-                  <p className="text-xs text-balance text-justify">
+                  <p className="text-xs text-pretty text-justify">
                     {m.message}
                   </p>
                 </div>

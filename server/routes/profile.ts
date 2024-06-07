@@ -46,9 +46,14 @@ const app = new Hono()
 	.get('/', (c) => {
 
 		const profile_fitrah = my_profile
-
 		return c.json({profile: profile_fitrah});
 
+	})
+	.post('/upload', async (c) => {
+		const body = await c.req.parseBody()
+		const filename = body['file']
+
+		return c.json({filename:filename})
 	})
 
 

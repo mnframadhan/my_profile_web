@@ -22,13 +22,13 @@ export const insertRequestCompSchema = createInsertSchema(requestComp, {
         .min(2, {message: "Terlalu sedikit karakter"})
         .max(100, {message: "Terlalu banyak karakter"}),
     bidang: z
-    .string()
-    .min(2, {message: "Terlalu sedikit karakter"})
-    .max(100, {message: "Terlalu banyak karakter"}),
+        .string()
+        .min(2, {message: "Terlalu sedikit karakter"})
+        .max(100, {message: "Terlalu banyak karakter"}),
     no_wa: z
-    .string()
-    .min(2, {message: "Terlalu sedikit karakter"})
-    .max(14, {message: "Terlalu banyak karakter"}),
+        .string()
+        .min(2, {message: "Terlalu sedikit karakter"})
+        .max(14, {message: "Terlalu banyak karakter"}),
 })
 
 export const selectRequestCompSchema = createSelectSchema(requestComp)
